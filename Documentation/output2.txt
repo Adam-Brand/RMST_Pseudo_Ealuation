@@ -1,0 +1,2 @@
+   RMSTdiff          SE lower.bound upper.bound        pval 
+   3.091600    0.245800    2.609841    3.573359    0.000000 
