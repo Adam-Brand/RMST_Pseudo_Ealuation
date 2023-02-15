@@ -18,4 +18,9 @@ The programs to produce the results are in the 'Programs' folder.
 Tables 1 and 2 are produced by the analysis.R program.
 
 
- - run analysis.R. Table 1 is produced by lines 132-205. Table 2 is produced by lines 232-305
+ - run analysis.R. Table 1 is produced by lines 132-205. Table 2 is produced by lines 232-305.
+
+
+ In order to produce the result datasets, run programs sim1.R, sim1type1.R, sim2.R, sim2type1.R.
+
+ The program sourceRMSTdiff.R is the source file containing the R functions. debug.R is an acillary program for debugging purposes and is not needed for the results. RMST_present.R is a program I used for a presentation and is not necessary for results in the manuscript.
