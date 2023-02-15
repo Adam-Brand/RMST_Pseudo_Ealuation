@@ -37,11 +37,11 @@ data <- simdat.cov(n=2000,               #total number of observations
 data <- data.frame(data)
 
 data <- data[,c("id","entry.time","trtn","female","age.cent","event","surv.time","event.time")]
-sink(file="output1.txt")
+sink(file="Documentation/output1.txt")
 head(data)
 closeAllConnections()
 
-sink(file="output2.txt")
+sink(file="Documentation/output2.txt")
 RMSTdiff(data=data,
          time.var="surv.time",
          event.var="event",
@@ -61,20 +61,20 @@ abline(v=20,col="red")
 legend(22,0.9,legend=c("Group 1", "Group 0"), col=c("green","blue"),lty=2:1)
 
 
-sink(file="output3.txt")
-undebug(RMSTdiff)
-RMSTdiff(data=data,
-         time.var="surv.time",
-         event.var="event",
-         trtn.var="trtn",
-         covs=c("female","age.cent"),
-         tmax=20,
-         method="pseudo",
-         var.type1="sandwich")
-closeAllConnections()
+# sink(file="output3.txt")
+# undebug(RMSTdiff)
+# RMSTdiff(data=data,
+#          time.var="surv.time",
+#          event.var="event",
+#          trtn.var="trtn",
+#          covs=c("female","age.cent"),
+#          tmax=20,
+#          method="pseudo",
+#          var.type1="sandwich")
+# closeAllConnections()
 
 
-sink(file="output4.txt")
+sink(file="Documentation/output4.txt")
 RMSTdiff(data=data,
          time.var="surv.time",
          event.var="event",

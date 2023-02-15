@@ -106,53 +106,201 @@ sum.func <- function(result, scen){
 
 #### for sim1 nocov, 550; top half of table for scenario 1
 sim1nocov <- readRDS("Results/sim1/PH.ss550trteff3nocov.nocoef.LTFU0.02.RDS")
-result <- sum.func(sim1nocov)
-result
+result1top <- sum.func(sim1nocov)
+result1top
 #### the RP method failed to converge in 10 trials (1%)
 summary(sim1nocov)
 # type 1 error row
 sim1type <- readRDS("Results/sim1type1/PH.ss550trteff0nocov.nocoef.LTFU0.02.RDS")
-result <- sum.func(sim1type)
-result
+result1t1 <- sum.func(sim1type)
+result1t1
 
 
 ### for sim1 including age and female, also 550; bottom half of scenario 1
 sim1cov <- readRDS("Results/sim1/PH.ss550trteff3nocov.age.fem.LTFU0.02.RDS")
-result <- sum.func(sim1cov)
-result
+result1bot <- sum.func(sim1cov)
+result1bot
 #### the RP method failed to converge in 10 trials (1%)
 summary(sim1cov)
 #type 1 error row
 sim1type1cov <- readRDS("Results/sim1type1/PH.ss550trteff0nocov.age.fem.LTFU0.02.RDS")
-result <- sum.func(sim1type1cov) 
-result
+result1b1 <- sum.func(sim1type1cov) 
+result1b1
 
 
+##### Table 1 in the manuscript
+tab1 <- matrix(nrow=10,ncol=7)
+tab1[1,1] <- result1top["km.bias"]
+tab1[2,1] <- result1top["km.vbias"]
+tab1[3,1] <- result1top["km.se"]
+tab1[4,1] <- result1top["km.rej"]
+tab1[5,1] <- result1t1["km.rej"]
+
+tab1[1,4] <- result1top["psu.ajk.bias"]
+tab1[2,4] <- result1top["psu.ajk.vbias"]
+tab1[3,4] <- result1top["psu.ajk.se"]
+tab1[4,4] <- result1top["psu.ajk.rej"]
+tab1[5,4] <- result1t1["psu.ajk.rej"]
+
+tab1[1,5] <- result1top["psu.sand.bias"]
+tab1[2,5] <- result1top["psu.sand.vbias"]
+tab1[3,5] <- result1top["psu.sand.se"]
+tab1[4,5] <- result1top["psu.sand.rej"]
+tab1[5,5] <- result1t1["psu.sand.rej"]
+
+tab1[1,6] <- result1top["rp.nai.bias"]
+tab1[2,6] <- result1top["rp.nai.vbias"]
+tab1[3,6] <- result1top["rp.nai.se"]
+tab1[4,6] <- result1top["rp.nai.rej"]
+tab1[5,6] <- result1t1["rp.nai.rej"]
+
+tab1[1,7] <- result1top["rp.asy.bias"]
+tab1[2,7] <- result1top["rp.asy.vbias"]
+tab1[3,7] <- result1top["rp.asy.se"]
+tab1[4,7] <- result1top["rp.asy.rej"]
+tab1[5,7] <- result1t1["rp.asy.rej"]
+
+tab1[6,2] <- result1bot["tian.bias"]
+tab1[7,2] <- result1bot["tian.vbias"]
+tab1[8,2] <- result1bot["tian.se"]
+tab1[9,2] <- result1bot["tian.rej"]
+tab1[10,2] <- result1b1["tian.rej"]
+
+tab1[6,3] <- result1bot["cox.bias"]
+tab1[7,3] <- result1bot["cox.vbias"]
+tab1[8,3] <- result1bot["cox.asy.se"]
+tab1[9,3] <- result1bot["cox.asy.rej"]
+tab1[10,3] <- result1b1["cox.asy.rej"]
+
+tab1[6,4] <- result1bot["psu.ajk.bias"]
+tab1[7,4] <- result1bot["psu.ajk.vbias"]
+tab1[8,4] <- result1bot["psu.ajk.se"]
+tab1[9,4] <- result1bot["psu.ajk.rej"]
+tab1[10,4] <- result1b1["psu.ajk.rej"]
+
+tab1[6,5] <- result1bot["psu.sand.bias"]
+tab1[7,5] <- result1bot["psu.sand.vbias"]
+tab1[8,5] <- result1bot["psu.sand.se"]
+tab1[9,5] <- result1bot["psu.sand.rej"]
+tab1[10,5] <- result1b1["psu.sand.rej"]
+
+tab1[6,6] <- result1bot["rp.nai.bias"]
+tab1[7,6] <- result1bot["rp.nai.vbias"]
+tab1[8,6] <- result1bot["rp.nai.se"]
+tab1[9,6] <- result1bot["rp.nai.rej"]
+tab1[10,6] <- result1b1["rp.nai.rej"]
+
+tab1[6,7] <- result1bot["rp.asy.bias"]
+tab1[7,7] <- result1bot["rp.asy.vbias"]
+tab1[8,7] <- result1bot["rp.asy.se"]
+tab1[9,7] <- result1bot["rp.asy.rej"]
+tab1[10,7] <- result1b1["rp.asy.rej"]
+
+tab1 <- round(tab1, digits=3)
+
+tab1 <- data.frame(tab1)
+
+colnames(tab1) <- c("KM","Tian","Chen","Psu.ajk","Psu.sand","FPM.delta","FPM.Mest")
+rownames(tab1) <- c("Bias","var(Bias)","Mean(SE)","Power","Type 1 error","Bias2","var(Bias)2","Mean(SE)2","Power2","Type 1 error2")
+print(tab1)
 
 #### for sim2 nocov, ss 150; top half of table for scenario 2
 sim2nocov <- readRDS("Results/sim2/PH.ss150trteff3nocov.age.neg2.fem3.LTFU0.02.RDS")
-result <- sum.func(sim2nocov)
-result
+result2top <- sum.func(sim2nocov)
+result2top
 ### All methods converged on all trials
 summary(sim2nocov)
 # type 1 error row
 sim2type1 <- readRDS("Results/sim2type1/PH.ss150trteff0nocov.age.neg2.fem3.LTFU0.02.RDS")
-result <- sum.func(sim2type1)
-result
+result2t1 <- sum.func(sim2type1)
+result2t1
 
 
 #### for sim2 nocov, ss 150; bottom half of table for scenario 2
 sim2cov <- readRDS("Results/sim2/PH.ss150trteff3covsall.age.neg2.fem3.LTFU0.02.RDS")
-result <- sum.func(sim2cov)
-result
+result2bot <- sum.func(sim2cov)
+result2bot
 ### RP method failed to converge on 2 trials (.2%)
 summary(sim2cov)
 # type 1 error row
 sim2type1cov <- readRDS("Results/sim2type1/PH.ss150trteff0covsall.age.neg2.fem3.LTFU0.02.RDS")
-result <- sum.func(sim2type1cov)
-result
+result2b1 <- sum.func(sim2type1cov)
+result2b1
 
 
+##### Table 2 in the manuscript
+tab2 <- matrix(nrow=10,ncol=7)
+tab2[1,1] <- result2top["km.bias"]
+tab2[2,1] <- result2top["km.vbias"]
+tab2[3,1] <- result2top["km.se"]
+tab2[4,1] <- result2top["km.rej"]
+tab2[5,1] <- result2t1["km.rej"]
 
+tab2[1,4] <- result2top["psu.ajk.bias"]
+tab2[2,4] <- result2top["psu.ajk.vbias"]
+tab2[3,4] <- result2top["psu.ajk.se"]
+tab2[4,4] <- result2top["psu.ajk.rej"]
+tab2[5,4] <- result2t1["psu.ajk.rej"]
 
+tab2[1,5] <- result2top["psu.sand.bias"]
+tab2[2,5] <- result2top["psu.sand.vbias"]
+tab2[3,5] <- result2top["psu.sand.se"]
+tab2[4,5] <- result2top["psu.sand.rej"]
+tab2[5,5] <- result2t1["psu.sand.rej"]
+
+tab2[1,6] <- result2top["rp.nai.bias"]
+tab2[2,6] <- result2top["rp.nai.vbias"]
+tab2[3,6] <- result2top["rp.nai.se"]
+tab2[4,6] <- result2top["rp.nai.rej"]
+tab2[5,6] <- result2t1["rp.nai.rej"]
+
+tab2[1,7] <- result2top["rp.asy.bias"]
+tab2[2,7] <- result2top["rp.asy.vbias"]
+tab2[3,7] <- result2top["rp.asy.se"]
+tab2[4,7] <- result2top["rp.asy.rej"]
+tab2[5,7] <- result2t1["rp.asy.rej"]
+
+tab2[6,2] <- result2bot["tian.bias"]
+tab2[7,2] <- result2bot["tian.vbias"]
+tab2[8,2] <- result2bot["tian.se"]
+tab2[9,2] <- result2bot["tian.rej"]
+tab2[10,2] <- result2b1["tian.rej"]
+
+tab2[6,3] <- result2bot["cox.bias"]
+tab2[7,3] <- result2bot["cox.vbias"]
+tab2[8,3] <- result2bot["cox.asy.se"]
+tab2[9,3] <- result2bot["cox.asy.rej"]
+tab2[10,3] <- result2b1["cox.asy.rej"]
+
+tab2[6,4] <- result2bot["psu.ajk.bias"]
+tab2[7,4] <- result2bot["psu.ajk.vbias"]
+tab2[8,4] <- result2bot["psu.ajk.se"]
+tab2[9,4] <- result2bot["psu.ajk.rej"]
+tab2[10,4] <- result2b1["psu.ajk.rej"]
+
+tab2[6,5] <- result2bot["psu.sand.bias"]
+tab2[7,5] <- result2bot["psu.sand.vbias"]
+tab2[8,5] <- result2bot["psu.sand.se"]
+tab2[9,5] <- result2bot["psu.sand.rej"]
+tab2[10,5] <- result2b1["psu.sand.rej"]
+
+tab2[6,6] <- result2bot["rp.nai.bias"]
+tab2[7,6] <- result2bot["rp.nai.vbias"]
+tab2[8,6] <- result2bot["rp.nai.se"]
+tab2[9,6] <- result2bot["rp.nai.rej"]
+tab2[10,6] <- result2b1["rp.nai.rej"]
+
+tab2[6,7] <- result2bot["rp.asy.bias"]
+tab2[7,7] <- result2bot["rp.asy.vbias"]
+tab2[8,7] <- result2bot["rp.asy.se"]
+tab2[9,7] <- result2bot["rp.asy.rej"]
+tab2[10,7] <- result2b1["rp.asy.rej"]
+
+tab2 <- round(tab2, digits=3)
+
+tab2 <- data.frame(tab2)
+
+colnames(tab2) <- c("KM","Tian","Chen","Psu.ajk","Psu.sand","FPM.delta","FPM.Mest")
+rownames(tab2) <- c("Bias","var(Bias)","Mean(SE)","Power","Type 1 error","Bias2","var(Bias)2","Mean(SE)2","Power2","Type 1 error2")
+print(tab2)
 
